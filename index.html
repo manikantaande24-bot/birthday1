@@ -1,0 +1,3100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Happy Birthday | Birthday Celebration</title>
+    <meta name="description" content="Join us to celebrate a very special birthday!">
+
+    <!-- Rounded, playful typography for a child-friendly birthday design. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. GLOBAL STYLES
+        ========================================= */
+
+        :root {
+            --pink: #f7a9ba;
+            --dark-pink: #d85e85;
+            --cream: #fff8ed;
+            --brown: #67423e;
+            --text: #593c43;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100%;
+        }
+
+        body.intro-open {
+            overflow: hidden;
+        }
+
+        button, input, select, textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border: 0;
+            -webkit-user-drag: none;
+            user-select: none;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .section {
+            position: relative;
+            width: 100%;
+            /* Extra top space moves section titles comfortably downward. */
+            padding: 82px 18px 65px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .section-heading {
+            font-family: "Fredoka", "Baloo 2", "Trebuchet MS", sans-serif;
+            font-size: clamp(28px, 5vw, 46px);
+            font-weight: 700;
+            color: #e34e86;
+            margin: 8px 0 10px;
+            line-height: 1.15;
+            letter-spacing: .3px;
+            -webkit-text-stroke: .6px #fffaf0;
+            paint-order: stroke fill;
+            text-shadow: 0 2px 0 rgba(255,255,255,.95), 0 4px 0 rgba(255,220,229,.8), 0 7px 12px rgba(116,63,79,.12);
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform;
+        }
+
+        .section-subheading {
+            font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: #875568;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform;
+        }
+
+
+        /* =========================================
+           2. IMAGE LAYER SYSTEM
+        ========================================= */
+
+        .asset-scene {
+            position: relative;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
+            isolation: isolate;
+        }
+
+        .scene-base {
+            display: block;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .scene-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            object-fit: contain;
+            object-position: center;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .scene-content {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+
+        /* =========================================
+           3. INTRO VIDEO
+        ========================================= */
+
+        .intro-screen {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            min-height: 100svh;
+            z-index: 9999;
+            background: #fff0e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .intro-screen.is-leaving {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .intro-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            display: block;
+            /* Fill both regular and extra-tall phone screens without letterboxing. */
+            object-fit: cover;
+            object-position: center center;
+            background: #fff0e9;
+        }
+
+   /* Intro video: remove dark overlay and gradient */
+.intro-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 20px clamp(38px, 9vh, 95px);
+
+    /* No overlay or gradient */
+    background: transparent;
+
+    pointer-events: none;
+    transition: opacity .6s ease;
+}
+
+/* Hide Tap to Open after the user taps */
+.intro-overlay.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-overlay.hide .tap-button {
+    display: none !important;
+}
+
+.intro-overlay {
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+        .tap-button {
+            pointer-events: auto;
+            max-width: 90vw;
+            color: #9c4a66;
+            border: 1px solid rgba(255, 255, 255, .9);
+            background: rgba(255, 255, 255, .9);
+            padding: 15px 34px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .12);
+            animation: tapPulse 1.8s infinite;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes tapPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, .12);
+            }
+
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 10px 38px rgba(0, 0, 0, .20);
+            }
+        }
+
+        .intro-error {
+            max-width: 90vw;
+            color: #ffffff;
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .8);
+            background: rgba(0, 0, 0, .35);
+            padding: 9px 16px;
+            border-radius: 22px;
+        }
+
+
+        /* =========================================
+           4. WEBSITE REVEAL
+        ========================================= */
+
+        .website {
+            opacity: 0;
+            transition: opacity 1.1s ease;
+        }
+
+        .website.is-visible {
+            opacity: 1;
+        }
+
+
+        /* =========================================
+           5. HERO SECTION & INTRO RISE PARALLAX
+
+           Layer order:
+           herobg (fixed background, no scroll parallax)
+           heroshinchan
+           frontbaloons
+           Text
+        ========================================= */
+
+        .hero-section {
+            background: #fff0e6;
+            padding: 0;
+            min-height: 200px;
+            overflow: hidden;
+        }
+
+        .hero-scene {
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            z-index: 0;
+            transform: translate3d(0, 0, 0) scale(1);
+            will-change: transform, opacity;
+        }
+
+        .hero-shinchan {
+            z-index: 1;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform, opacity;
+        }
+
+        .hero-balloons {
+            z-index: 2;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform, opacity;
+        }
+
+        .hero-content {
+            z-index: 4;
+            align-items: flex-start;
+            /* Slightly lower than before, while staying above the character artwork. */
+            padding: 11% 5% 5%;
+        }
+
+        .hero-content-inner {
+            width: 100%;
+            max-width: 760px;
+            margin: 0 auto;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform;
+        }
+
+        .hero-small-title {
+            display: inline-block;
+            padding: 3px 15px 5px;
+            border: 1px solid rgba(255,255,255,.9);
+            border-radius: 30px;
+            background: rgba(255, 249, 232, .88);
+            box-shadow: 0 3px 10px rgba(112, 68, 78, .10);
+            font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+            font-size: clamp(12px, 2.2vw, 17px);
+            letter-spacing: clamp(1.5px, .6vw, 3px);
+            color: #704052;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+            font-weight: 800;
+            will-change: transform, opacity;
+        }
+
+        .hero-title {
+            color: #f04483;
+            font-family: "Fredoka", "Baloo 2", "Trebuchet MS", sans-serif;
+            font-size: clamp(30px, 7vw, 76px);
+            font-weight: 700;
+            letter-spacing: .3px;
+            line-height: 1.02;
+            -webkit-text-stroke: 1.5px #fff8e8;
+            paint-order: stroke fill;
+            text-shadow: 0 2px 0 #fff8e8, 0 5px 0 rgba(255,255,255,.9), 0 7px 12px rgba(104,49,69,.25);
+            filter: drop-shadow(0 2px 1px rgba(125, 55, 78, .14));
+            padding-bottom: 8PX;
+            will-change: transform, opacity;
+        }
+
+        .hero-description {
+            display: inline-block;
+            padding: 3px 13px 5px;
+            border-radius: 24px;
+            background: rgba(255, 249, 232, .86);
+            color: #704052;
+            font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+            font-size: clamp(13px, 2.2vw, 18px);
+            font-weight: 700;
+            margin-top: 8px;
+            letter-spacing: .4px;
+            line-height: 1.35;
+            box-shadow: 0 3px 10px rgba(112, 68, 78, .08);
+            will-change: transform, opacity;
+        }
+
+        /* Initial hidden state before intro opens to hero */
+        .hero-section.hero-pre-rise .hero-bg,
+        .hero-section.hero-pre-rise .hero-shinchan,
+        .hero-section.hero-pre-rise .hero-balloons,
+        .hero-section.hero-pre-rise .hero-small-title,
+        .hero-section.hero-pre-rise .hero-title,
+        .hero-section.hero-pre-rise .hero-description {
+            opacity: 0;
+        }
+
+        /* Staggered Rise Parallax Animation (plays ONLY when intro opens to hero) */
+        .hero-section.hero-rise-play .hero-bg {
+            animation: heroRiseBg 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0s backwards;
+        }
+
+        .hero-section.hero-rise-play .hero-shinchan {
+            animation: heroRiseShinchan 1.45s cubic-bezier(0.16, 1, 0.3, 1) 0.14s backwards;
+        }
+
+        .hero-section.hero-rise-play .hero-balloons {
+            animation: heroRiseBalloons 1.7s cubic-bezier(0.16, 1, 0.3, 1) 0.26s backwards;
+        }
+
+        .hero-section.hero-rise-play .hero-small-title {
+            animation: heroRiseTextSub 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.34s backwards;
+        }
+
+        .hero-section.hero-rise-play .hero-title {
+            animation: heroRiseTextMain 1.35s cubic-bezier(0.16, 1, 0.3, 1) 0.46s backwards;
+        }
+
+        .hero-section.hero-rise-play .hero-description {
+            animation: heroRiseTextDesc 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.58s backwards;
+        }
+
+        @keyframes heroRiseBg {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 48px, 0) scale(1.09);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+        }
+
+        @keyframes heroRiseShinchan {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 130px, 0) scale(0.93);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1);
+            }
+        }
+
+        @keyframes heroRiseBalloons {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 195px, 0) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1);
+            }
+        }
+
+        @keyframes heroRiseTextSub {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 58px, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes heroRiseTextMain {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 82px, 0) scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+        }
+
+        @keyframes heroRiseTextDesc {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 68px, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+
+        /* =========================================
+           6. BIRTHDAY DETAILS
+
+           Improved text visibility.
+           Bigger fonts and better spacing.
+        ========================================= */
+
+        .details-section {
+            background: url('Assets/detalsbg.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        .details-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform;
+        }
+
+        .details-card-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .details-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4% 5%;
+        }
+
+        /* Text stays inside the card's inner border. */
+
+        .details-inner {
+            width: 62%;
+            max-width: 560px;
+            margin: auto;
+            color: #593c43;
+            transform: translateY(6%);
+            padding-top: 88px;
+        }
+
+        .details-heading {
+            font-family: Georgia, serif;
+            font-size: clamp(22px, 3.4vw, 36px);
+            font-weight: 700;
+            color: #c8587d;
+            margin-bottom: 22px;
+            line-height: 1.2;
+            text-shadow: 0 1px 0 rgba(255,255,255,.65);
+        }
+
+        .detail-item {
+            margin: 19px 0;
+        }
+
+        .detail-label {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            font-size: clamp(10px, 1.55vw, 13px);
+            color: #a74f6c;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .detail-value {
+            font-family: Georgia, serif;
+            font-size: clamp(15px, 2.35vw, 21px);
+            font-weight: 600;
+            color: #593c43;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+            text-shadow: 0 1px 0 rgba(255,255,255,.7);
+        }
+
+        .details-note {
+            font-size: clamp(12px, 1.55vw, 14px);
+            font-weight: 500;
+            color: #76515b;
+            margin-top: 20px;
+            line-height: 1.55;
+        }
+
+
+        /* =========================================
+           7. COUNTDOWN SECTION
+
+           Background: countdownbg.png (fixed)
+           Illustration: countdownbox.png
+
+           Only the live numbers are added.
+           No additional countdown tile backgrounds.
+        ========================================= */
+
+        .countdown-section {
+            background: url('Assets/countdownbg.png') no-repeat center center;
+            background-size: cover;
+            padding: 35px 0 45px;
+        }
+
+        .countdown-scene {
+            position: relative;
+            margin: 0 auto;
+            width: fit-content;
+            max-width: 100%;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform;
+        }
+
+        .countdown-bg {
+            /* Preserves the original artwork dimensions. */
+            visibility: hidden;
+            z-index: 0;
+        }
+
+        .countdown-box-image {
+            z-index: 1;
+        }
+
+        .countdown-content {
+            z-index: 3;
+            padding: 0;
+        }
+
+        .countdown-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+        }
+
+        /* Position the 4 live numbers over the existing
+           coloured boxes in countdownbox.png. */
+
+        .countdown-grid {
+            position: absolute;
+            top: 63%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 63%;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            align-items: center;
+            gap: 2%;
+        }
+
+        /* Transparent units: no extra backgrounds,
+           borders, rounded cards or shadows. */
+
+        .countdown-unit {
+            min-width: 0;
+            min-height: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .countdown-number {
+            display: block;
+            font-family: Georgia, serif;
+            font-size: clamp(15px, 4.5vw, 26px);
+            font-weight: 800;
+            color: #713c76;
+            line-height: 1;
+            text-shadow: 0 1px 2px rgba(255,255,255,.85);
+        }
+
+
+        /* =========================================
+           8. IMAGE CAROUSEL
+
+           Smooth horizontal sliding gallery.
+           No flipbook or page-turn effects.
+        ========================================= */
+
+        .gallery-section {
+            background:
+                radial-gradient(circle at 15% 20%, #fff0ea, transparent 35%),
+                radial-gradient(circle at 85% 80%, #ffe6ed, transparent 35%),
+                #fffaf3;
+        }
+
+        .gallery-wrapper {
+            width: min(100%, 980px);
+            margin: 0 auto;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform;
+        }
+
+        .gallery-carousel {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 52px;
+        }
+
+        .carousel-viewport {
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(226, 171, 185, .55);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .82);
+            box-shadow:
+                0 18px 50px rgba(120, 75, 88, .13),
+                0 3px 12px rgba(120, 75, 88, .06);
+            touch-action: pan-y;
+            outline: none;
+        }
+
+        .carousel-viewport:focus-visible {
+            outline: 3px solid rgba(216, 94, 133, .5);
+            outline-offset: 5px;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            transform: translateX(0);
+            transition: transform .65s cubic-bezier(.22, .72, .25, 1);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            height: min(68vh, 660px);
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(10px, 2.5vw, 24px);
+            background:
+                radial-gradient(circle at 50% 45%, #ffffff 0%, #fffaf8 75%);
+        }
+
+        .carousel-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 12px;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Previous and next arrows */
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 3;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-50%);
+            border: 1px solid rgba(225, 166, 183, .8);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .94);
+            color: #b95375;
+            font-size: 20px;
+            line-height: 1;
+            box-shadow: 0 6px 20px rgba(120, 65, 82, .13);
+            transition:
+                background .25s ease,
+                color .25s ease,
+                transform .25s ease,
+                box-shadow .25s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .carousel-arrow:hover {
+            background: #e987a5;
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.07);
+            box-shadow: 0 9px 24px rgba(190, 85, 120, .22);
+        }
+
+        .carousel-arrow.previous {
+            left: 0;
+        }
+
+        .carousel-arrow.next {
+            right: 0;
+        }
+
+        .carousel-arrow:focus-visible,
+        .gallery-button:focus-visible,
+        .carousel-dot:focus-visible {
+            outline: 3px solid rgba(216, 94, 133, .45);
+            outline-offset: 3px;
+        }
+
+        /* Carousel bottom controls */
+
+        .gallery-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        .gallery-counter {
+            color: #9e6672;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            min-width: 58px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border: 0;
+            border-radius: 50px;
+            background: #e8c5ce;
+            cursor: pointer;
+            transition:
+                width .3s ease,
+                background .3s ease,
+                transform .3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .carousel-dot:hover {
+            transform: scale(1.2);
+            background: #d98ba2;
+        }
+
+        .carousel-dot.active {
+            width: 24px;
+            background: #d85e85;
+        }
+
+        .gallery-button {
+            min-height: 40px;
+            border: 1px solid #edb8c7;
+            border-radius: 30px;
+            background: #ffffff;
+            color: #bc607e;
+            padding: 9px 17px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: .5px;
+            transition: .3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .gallery-button:hover {
+            background: #e987a5;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .gallery-button.auto-button {
+            min-width: 125px;
+        }
+
+
+        /* =========================================
+           9. RSVP SECTION
+        ========================================= */
+
+        .rsvp-section {
+            background: url('Assets/rsvpbg.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        .rsvp-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            transform: translate3d(0, var(--parallax-y, 0px), 0);
+            will-change: transform;
+        }
+
+        .rsvp-card-image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .rsvp-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7% 5% 5%;
+        }
+
+        .rsvp-form-wrapper {
+            width: 68%;
+            max-width: 520px;
+            margin: auto;
+        }
+
+        .rsvp-heading {
+            color: #c7557b;
+            font-family: Georgia, serif;
+            font-size: clamp(21px, 4vw, 42px);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .rsvp-description {
+            font-size: clamp(10px, 1.6vw, 14px);
+            line-height: 1.5;
+            color: #875a65;
+            margin-bottom: 15px;
+        }
+
+        .rsvp-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .rsvp-input,
+        .rsvp-select,
+        .rsvp-textarea {
+            width: 100%;
+            min-width: 0;
+            padding: 12px 14px;
+            border: 1px solid #f0c3cf;
+            border-radius: 9px;
+            outline: none;
+            color: #704a55;
+            background: rgba(255, 255, 255, .92);
+            font-size: 13px;
+            transition: border .3s, box-shadow .3s;
+        }
+
+        .rsvp-input:focus,
+        .rsvp-select:focus,
+        .rsvp-textarea:focus {
+            border-color: #df82a0;
+            box-shadow: 0 0 0 3px rgba(223, 130, 160, .13);
+        }
+
+        .rsvp-textarea {
+            resize: vertical;
+            min-height: 65px;
+        }
+
+        .rsvp-submit {
+            padding: 13px 20px;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            background: linear-gradient(135deg, #ed95ad, #ce5c82);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 7px 18px rgba(190, 85, 120, .2);
+            transition: .3s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .rsvp-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(190, 85, 120, .3);
+        }
+
+        .rsvp-submit:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        .rsvp-status {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #9e4d6a;
+            margin-top: 8px;
+        }
+
+        .rsvp-dog {
+            position: absolute;
+            z-index: 5;
+            top: 1%;
+            left: 50%;
+            transform: translate3d(-50%, var(--parallax-y, 0px), 0);
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+
+        /* =========================================
+           10. FOOTER
+        ========================================= */
+
+        .footer {
+            background: #fff8f0;
+            color: #9c6976;
+            text-align: center;
+            padding: 23px 15px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================
+           11. RESPONSIVE DESIGN
+        ========================================= */
+
+        /* Tablets and small laptops */
+
+        @media (max-width: 900px) {
+
+            .carousel-slide {
+                height: min(62vh, 600px);
+            }
+
+            .rsvp-form-wrapper {
+                width: 72%;
+            }
+        }
+
+
+        /* Phones */
+
+        @media (max-width: 600px) {
+
+            .section {
+                padding: 58px 10px 42px;
+            }
+
+            .section-heading {
+                margin-top: 10px;
+                font-size: clamp(27px, 7vw, 38px);
+                line-height: 1.12;
+            }
+
+            .section-subheading {
+                font-size: 11px;
+                letter-spacing: 1.5px;
+                margin-bottom: 22px;
+            }
+
+            .hero-content {
+                padding: 10% 4% 6%;
+            }
+
+            .hero-small-title {
+                font-size: clamp(11px, 3vw, 14px);
+                padding: 2px 11px 4px;
+                margin-bottom: 6px;
+            }
+
+            .hero-title {
+                font-size: clamp(27px, 8vw, 43px);
+                line-height: 1.03;
+                -webkit-text-stroke: 1px #fff8e8;
+                text-shadow: 0 2px 0 #fff8e8, 0 4px 0 rgba(255,255,255,.9), 0 6px 10px rgba(104,49,69,.22);
+            }
+
+            .hero-description {
+                font-size: clamp(12px, 3.3vw, 15px);
+                margin-top: 7px;
+                padding: 2px 10px 4px;
+            }
+
+            /* Details section */
+
+            .details-inner {
+                width: 62%;
+                transform: translateY(5%);
+            }
+
+            .details-heading {
+                font-size: clamp(21px, 6vw, 26px);
+                margin-bottom: 15px;
+            }
+
+            .detail-item {
+                margin: 13px 0;
+            }
+
+            .detail-label {
+                font-size: 10px;
+                letter-spacing: 1.3px;
+                margin-bottom: 4px;
+            }
+
+            .detail-value {
+                font-size: clamp(15px, 4.2vw, 17px);
+                line-height: 1.3;
+            }
+
+            .details-note {
+                font-size: 12px;
+                margin-top: 13px;
+                line-height: 1.45;
+            }
+
+            /* Countdown numbers */
+
+            .countdown-grid {
+                top: 61.6%;
+                width: 55%;
+                gap: 2.5%;
+            }
+
+            .countdown-number {
+                font-size: clamp(14px, 5.2vw, 18px);
+            }
+
+            /* Mobile carousel */
+
+            .gallery-carousel {
+                padding: 0 36px;
+            }
+
+            .carousel-slide {
+                height: min(58vh, 480px);
+                min-height: 210px;
+                padding: 10px;
+            }
+
+            .carousel-viewport {
+                border-radius: 16px;
+            }
+
+            .carousel-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .gallery-footer {
+                gap: 12px;
+                margin-top: 16px;
+            }
+
+            .carousel-dots {
+                gap: 6px;
+            }
+
+            .gallery-button {
+                min-height: 38px;
+                padding: 9px 13px;
+            }
+
+            .gallery-button.auto-button {
+                min-width: 105px;
+                font-size: 11px;
+            }
+
+            /* RSVP section */
+
+            .rsvp-form-wrapper {
+                width: 78%;
+            }
+
+            .rsvp-content {
+                padding-top: 10%;
+            }
+
+            .rsvp-form {
+                gap: 7px;
+            }
+
+            .rsvp-input,
+            .rsvp-select,
+            .rsvp-textarea {
+                padding: 9px 10px;
+                font-size: 11px;
+            }
+
+            .rsvp-textarea {
+                min-height: 45px;
+            }
+
+            .rsvp-submit {
+                padding: 10px 15px;
+                font-size: 10px;
+            }
+
+            .tap-button {
+                padding: 14px 28px;
+                font-size: 12px;
+                letter-spacing: 2.5px;
+            }
+        }
+
+
+        /* =========================================
+           SMALL PHONES (320px - 380px)
+        ========================================= */
+
+        @media (max-width: 380px) {
+
+            .section {
+                padding: 48px 8px 32px;
+            }
+
+            .section-heading {
+                margin-top: 8px;
+                font-size: clamp(24px, 7.5vw, 31px);
+                line-height: 1.12;
+            }
+
+            .hero-content {
+                padding-top: 9%;
+            }
+
+            .hero-title {
+                font-size: clamp(25px, 8.2vw, 34px);
+            }
+
+            .hero-small-title {
+                letter-spacing: 2px;
+            }
+
+            /* Details */
+
+            .details-inner {
+                width: 62%;
+                transform: translateY(4%);
+            }
+
+            .details-heading {
+                font-size: 21px;
+                margin-bottom: 13px;
+            }
+
+            .detail-item {
+                margin: 11px 0;
+            }
+
+            .detail-label {
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+
+            .detail-value {
+                font-size: 14px;
+            }
+
+            .details-note {
+                font-size: 11px;
+                margin-top: 11px;
+            }
+
+            /* Countdown */
+
+            .countdown-grid {
+                top: 61.6%;
+                width: 55%;
+                gap: 2%;
+            }
+
+            .countdown-number {
+                font-size: 14px;
+            }
+
+            /* Carousel */
+
+            .gallery-carousel {
+                padding: 0 29px;
+            }
+
+            .carousel-slide {
+                height: min(52vh, 380px);
+                min-height: 175px;
+                padding: 7px;
+            }
+
+            .carousel-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 13px;
+            }
+
+            .gallery-footer {
+                gap: 9px;
+            }
+
+            .carousel-dots {
+                gap: 5px;
+            }
+
+            .carousel-dot {
+                width: 7px;
+                height: 7px;
+            }
+
+            .carousel-dot.active {
+                width: 19px;
+            }
+
+            .gallery-button {
+                min-height: 34px;
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .gallery-button.auto-button {
+                min-width: 92px;
+                font-size: 10px;
+            }
+
+            /* RSVP */
+
+            .rsvp-form-wrapper {
+                width: 86%;
+            }
+
+            .rsvp-input,
+            .rsvp-select,
+            .rsvp-textarea {
+                padding: 8px 9px;
+                font-size: 10px;
+            }
+
+            .rsvp-submit {
+                padding: 9px 12px;
+                font-size: 9px;
+                letter-spacing: 1.5px;
+            }
+
+            .tap-button {
+                padding: 12px 22px;
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
+        }
+
+
+        /* Short landscape phones */
+
+        @media (max-height: 520px) and (orientation: landscape) {
+
+            .intro-overlay {
+                padding-bottom: 18px;
+                gap: 8px;
+            }
+
+            .tap-button {
+                padding: 10px 24px;
+                font-size: 11px;
+                animation: none;
+            }
+
+            .carousel-slide {
+                height: 70vh;
+            }
+        }
+
+
+        /* Keep the full vertical video visible on landscape screens,
+           where cover would crop too much of the top and bottom. */
+        @media (orientation: landscape) {
+            .intro-video {
+                object-fit: contain;
+            }
+        }
+
+
+        /* =========================================
+           12. REDUCED MOTION ACCESSIBILITY
+        ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+        .countdown-label {
+            display: block;
+            margin-top: 4px;
+            font-family: Georgia, serif;
+            font-size: clamp(8px, 2vw, 12px);
+            font-weight: 700;
+            color: #713c76;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(255,255,255,.85);
+        }
+
+        /* =========================================
+   GLOBAL BLUE HIGHLIGHT REMOVAL
+========================================= */
+
+*,
+*::before,
+*::after {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+html,
+body,
+button,
+a,
+input,
+select,
+textarea,
+img,
+video,
+div,
+section {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Remove blue browser focus boxes */
+*:focus,
+*:focus-visible,
+*:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/* Prevent blue selection highlight */
+* {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Keep form fields usable */
+input,
+textarea {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* Remove blue image tap highlight */
+img,
+video {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+    </style>
+</head>
+
+<body class="intro-open">
+
+
+    <!-- =========================================
+         1. INTRO VIDEO
+    ========================================== -->
+
+    <div class="intro-screen" id="introScreen">
+
+        <video
+            class="intro-video"
+            id="introVideo"
+            playsinline
+            webkit-playsinline
+            preload="auto"
+        >
+            <source src="Assets/introvd.mp4" type="video/mp4">
+        </video>
+
+        <div class="intro-overlay" id="introOverlay">
+
+            <p class="intro-error" id="introError" hidden>
+                Video couldn't be loaded. Tap anywhere to continue.
+            </p>
+
+            <button class="tap-button" id="tapButton" type="button">
+                Tap to Open
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         MAIN BIRTHDAY WEBSITE
+    ========================================== -->
+
+    <main class="website" id="birthdayWebsite" hidden>
+
+
+        <!-- =====================================
+             2. HERO SECTION
+        ====================================== -->
+
+        <section class="hero-section hero-pre-rise" id="home">
+
+            <div class="asset-scene hero-scene">
+
+                <!-- Fixed hero background (no scroll parallax) -->
+                <img
+                    src="Assets/herobg.png"
+                    class="scene-base hero-bg"
+                    alt=""
+                    decoding="async"
+                >
+
+                <!-- Downward scrolling parallax layers -->
+                <img
+                    src="Assets/heroshinchan.png"
+                    class="scene-layer hero-shinchan"
+                    data-parallax="0.09"
+                    alt=""
+                    decoding="async"
+                >
+
+                <img
+                    src="Assets/frontbaloons.png"
+                    class="scene-layer hero-balloons"
+                    data-parallax="0.18"
+                    alt=""
+                    decoding="async"
+                >
+
+                <div class="scene-content hero-content">
+
+                    <div class="hero-content-inner" data-parallax="0.14">
+
+                        <p class="hero-small-title">
+                            You're Invited To
+                        </p>
+
+                        <h1 class="hero-title">
+                            ROHAN'S 1ST BIRTHDAY
+                        </h1>
+
+                        <p class="hero-description" id="heroName">
+                            Let's Celebrate Together!
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             3. BIRTHDAY DETAILS
+        ====================================== -->
+
+        <section class="section details-section" id="details">
+
+            <h2 class="section-heading" data-parallax="0.06">
+                Birthday Celebration
+            </h2>
+
+            <p class="section-subheading" data-parallax="0.08">
+                Save the Date
+            </p>
+
+            <div class="details-wrapper" data-parallax="0.10">
+
+                <img
+                    src="Assets/detailscard.png"
+                    class="details-card-image"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                >
+
+                <div class="details-content">
+
+                    <div class="details-inner">
+
+                        <h3 class="details-heading">
+                            You're Invited!
+                        </h3>
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Birthday Date
+                            </span>
+
+                            <p class="detail-value" id="birthdayDateText">
+                                Add Birthday Date
+                            </p>
+
+                        </div>
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Celebration Time
+                            </span>
+
+                            <p class="detail-value" id="birthdayTimeText">
+                                Add Birthday Time
+                            </p>
+
+                        </div>
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Venue
+                            </span>
+
+                            <p class="detail-value" id="birthdayVenueText">
+                                Add Venue Details
+                            </p>
+
+                        </div>
+
+                        <p class="details-note">
+                            Come celebrate with cake, games and lots of fun.
+                            Your presence will make my day extra special!
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             4. COUNTDOWN SECTION
+        ====================================== -->
+
+        <section
+            class="section countdown-section"
+            id="countdown"
+            aria-label="Countdown to the birthday"
+        >
+
+            <div class="asset-scene countdown-scene" data-parallax="0.10">
+
+                <!-- Invisible sizing image preserves the artwork ratio.
+                     Visible section background is countdownbg.png (fixed). -->
+
+                <img
+                    src="Assets/countdownbg.png"
+                    class="scene-base countdown-bg"
+                    alt=""
+                    decoding="async"
+                >
+
+                <!-- Original birthday illustration with four coloured boxes. -->
+
+                <img
+                    src="Assets/countdownbox.png"
+                    class="scene-layer countdown-box-image"
+                    alt="Birthday countdown illustration"
+                    loading="lazy"
+                    decoding="async"
+                >
+
+                <!-- Only live numbers are placed over the four boxes.
+                     Days, Hours, Minutes and Seconds labels are already
+                     part of the original countdown artwork. -->
+
+                <div class="scene-content countdown-content">
+
+                    <div class="countdown-inner">
+
+                        <div class="countdown-grid">
+
+                            <div class="countdown-unit">
+
+                                <span
+                                    class="countdown-number"
+                                    id="days"
+                                >--</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+
+                            <div class="countdown-unit">
+
+                                <span
+                                    class="countdown-number"
+                                    id="hours"
+                                >--</span>
+                                <span class="countdown-label">Hours</span>
+
+                            </div>
+
+                            <div class="countdown-unit">
+
+                                <span
+                                    class="countdown-number"
+                                    id="minutes"
+                                >--</span>
+                                <span class="countdown-label">Minutes</span>
+
+                            </div>
+
+                            <div class="countdown-unit">
+
+                                <span
+                                    class="countdown-number"
+                                    id="seconds"
+                                >--</span>
+                                <span class="countdown-label">Seconds</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             5. PHOTO CAROUSEL
+        ====================================== -->
+
+        <section class="section gallery-section" id="gallery">
+
+            <h2 class="section-heading" data-parallax="0.06">
+                Beautiful Memories
+            </h2>
+
+            <p class="section-subheading" data-parallax="0.08">
+                Little Moments, Big Happiness
+            </p>
+
+            <div class="gallery-wrapper" data-parallax="0.10">
+
+                <div class="gallery-carousel" id="galleryCarousel">
+
+                    <!-- Previous button -->
+
+                    <button
+                        class="carousel-arrow previous"
+                        id="previousImage"
+                        type="button"
+                        aria-label="Show previous photo"
+                    >
+                        &#10094;
+                    </button>
+
+
+                    <!-- Carousel viewport -->
+
+                    <div
+                        class="carousel-viewport"
+                        id="galleryViewport"
+                        role="region"
+                        aria-label="Birthday photo carousel"
+                        tabindex="0"
+                    >
+
+                        <div class="carousel-track" id="galleryTrack">
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img1.png"
+                                    alt="Birthday memory 1"
+                                    loading="eager"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img2.png"
+                                    alt="Birthday memory 2"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img3.png"
+                                    alt="Birthday memory 3"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img4.png"
+                                    alt="Birthday memory 4"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img5.png"
+                                    alt="Birthday memory 5"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img6.png"
+                                    alt="Birthday memory 6"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img7.png"
+                                    alt="Birthday memory 7"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img8.png"
+                                    alt="Birthday memory 8"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img9.png"
+                                    alt="Birthday memory 9"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img10.png"
+                                    alt="Birthday memory 10"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img11.png"
+                                    alt="Birthday memory 11"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="Assets/img12.png"
+                                    alt="Birthday memory 12"
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Next button -->
+
+                    <button
+                        class="carousel-arrow next"
+                        id="nextImage"
+                        type="button"
+                        aria-label="Show next photo"
+                    >
+                        &#10095;
+                    </button>
+
+                </div>
+
+
+                <!-- Carousel controls -->
+
+                <div class="gallery-footer">
+
+                    <p class="gallery-counter" id="galleryCounter">
+                        01 / 12
+                    </p>
+
+                    <div
+                        class="carousel-dots"
+                        id="galleryDots"
+                        aria-label="Choose a photo"
+                    ></div>
+
+                    <button
+                        class="gallery-button auto-button"
+                        id="autoPlayButton"
+                        type="button"
+                    >
+                        Pause Slideshow
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             6. RSVP SECTION
+        ====================================== -->
+
+        <section class="section rsvp-section" id="rsvp">
+
+            <h2 class="section-heading" data-parallax="0.06">
+                Join the Celebration
+            </h2>
+
+            <p class="section-subheading" data-parallax="0.08">
+                Let Us Know You're Coming
+            </p>
+
+            <div class="rsvp-wrapper" data-parallax="0.10">
+
+                <img
+                    src="Assets/rsvpcard.png"
+                    class="rsvp-card-image"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                >
+
+                <div class="rsvp-content">
+
+                    <div class="rsvp-form-wrapper">
+
+                        <h3 class="rsvp-heading">
+                            RSVP
+                        </h3>
+
+                        <p class="rsvp-description">
+                            We would love to celebrate with you!
+                        </p>
+
+                        <form class="rsvp-form" id="rsvpForm">
+
+                            <input
+                                class="rsvp-input"
+                                type="text"
+                                name="name"
+                                placeholder="Your Name"
+                                required
+                            >
+
+                            <select
+                                class="rsvp-select"
+                                name="attendance"
+                                required
+                            >
+
+                                <option value="" disabled selected>
+                                    Will you attend?
+                                </option>
+
+                                <option value="Yes">
+                                    Yes, I'll be there!
+                                </option>
+
+                                <option value="No">
+                                    Sorry, I can't make it
+                                </option>
+
+                            </select>
+
+                            <input
+                                class="rsvp-input"
+                                type="number"
+                                name="guests"
+                                min="1"
+                                max="20"
+                                value="1"
+                                placeholder="Number of Guests"
+                                required
+                            >
+
+                            <textarea
+                                class="rsvp-textarea"
+                                name="message"
+                                placeholder="Your wishes or message (optional)"
+                            ></textarea>
+
+                            <button
+                                class="rsvp-submit"
+                                type="submit"
+                                id="rsvpSubmit"
+                            >
+                                SUBMIT RSVP
+                            </button>
+
+                            <p
+                                class="rsvp-status"
+                                id="rsvpStatus"
+                                aria-live="polite"
+                            ></p>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <img
+                    src="Assets/rsvpshinchandog.png"
+                    class="rsvp-dog"
+                    data-parallax="0.03"
+                    alt="Shinchan and his dog"
+                    loading="lazy"
+                    decoding="async"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             7. FOOTER
+        ====================================== -->
+
+        <footer class="footer">
+
+            Made with Love &hearts; Happy Birthday!
+
+        </footer>
+
+    </main>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        /* =====================================
+           1. BIRTHDAY INFORMATION
+
+           EDIT THESE VALUES FOR EACH BIRTHDAY.
+
+           Countdown format:
+           YYYY-MM-DDTHH:MM:SS
+
+           Time uses the visitor's local timezone.
+        ====================================== */
+
+        const BIRTHDAY_INFO = {
+
+            // Sample details for the 1st birthday design.
+            // Replace these values with the actual event details.
+
+            name: "Join us for my 1st Birthday!",
+
+            date: "Sunday, 15 November 2026",
+
+            time: "5:00 PM onwards",
+
+            venue: "At Our Home",
+
+            countdownDate: "2026-11-15T17:00:00"
+
+        };
+
+
+        // Optional RSVP submission URL.
+        // Add your form/API endpoint here.
+        // Leave blank for a front-end-only RSVP form.
+
+        const RSVP_ENDPOINT = "";
+
+
+        /* =====================================
+           2. INTRO VIDEO TRANSITION & HERO RISE
+        ====================================== */
+
+        const introScreen = document.getElementById("introScreen");
+
+        const introVideo = document.getElementById("introVideo");
+
+        const introOverlay = document.getElementById("introOverlay");
+
+        const introError = document.getElementById("introError");
+
+        const birthdayWebsite = document.getElementById("birthdayWebsite");
+
+        const tapButton = document.getElementById("tapButton");
+
+        const heroSection = document.getElementById("home");
+
+
+        let introStarted = false;
+
+        let websiteOpened = false;
+
+        let introFailed = false;
+
+        let heroRisePlayed = false;
+
+
+        function triggerHeroRiseAnimation() {
+
+            if (heroRisePlayed || !heroSection) return;
+
+            heroRisePlayed = true;
+
+            heroSection.classList.remove("hero-pre-rise");
+
+            heroSection.classList.add("hero-rise-play");
+
+            window.setTimeout(() => {
+
+                heroSection.classList.remove("hero-rise-play");
+
+                heroSection.classList.add("hero-rise-done");
+
+            }, 2250);
+
+        }
+
+
+        function showIntroError(message) {
+
+            if (websiteOpened) return;
+
+            introError.textContent = message;
+
+            introError.hidden = false;
+
+            introOverlay.classList.remove("hide");
+
+        }
+
+
+        async function startIntro() {
+
+            if (introStarted || websiteOpened) return;
+
+            if (introFailed) {
+
+                openBirthdayWebsite();
+
+                return;
+
+            }
+
+            introStarted = true;
+
+            introOverlay.classList.add("hide");
+
+            introError.hidden = true;
+
+
+            try {
+
+                introVideo.currentTime = 0;
+
+                await introVideo.play();
+
+            } catch (error) {
+
+                introStarted = false;
+
+                introOverlay.classList.remove("hide");
+
+                showIntroError(
+                    "Tap to try playing the video again."
+                );
+
+                console.error("Intro video could not play:", error);
+
+            }
+
+        }
+
+
+        function openBirthdayWebsite() {
+
+            if (websiteOpened) return;
+
+            websiteOpened = true;
+
+            introVideo.pause();
+
+            introScreen.classList.add("is-leaving");
+
+
+            window.setTimeout(() => {
+
+                introScreen.hidden = true;
+
+                birthdayWebsite.hidden = false;
+
+                document.body.classList.remove("intro-open");
+
+                window.scrollTo(0, 0);
+
+
+                requestAnimationFrame(() => {
+
+                    birthdayWebsite.classList.add("is-visible");
+
+                    triggerHeroRiseAnimation();
+
+                    startCountdown();
+
+                    initSmoothParallax();
+
+                });
+
+            }, 850);
+
+        }
+
+
+        function handleIntroMediaError() {
+
+            if (websiteOpened) return;
+
+            introFailed = true;
+
+            introStarted = false;
+
+            showIntroError(
+                "Video couldn't be loaded. Tap anywhere to continue."
+            );
+
+        }
+
+
+        introScreen.addEventListener("click", () => {
+
+            if (websiteOpened) return;
+
+            if (introFailed) {
+
+                openBirthdayWebsite();
+
+                return;
+
+            }
+
+            startIntro();
+
+        });
+
+
+        tapButton.addEventListener("click", (event) => {
+
+            event.stopPropagation();
+
+            if (introFailed) {
+
+                openBirthdayWebsite();
+
+                return;
+
+            }
+
+            startIntro();
+
+        });
+
+
+        introVideo.addEventListener("ended", openBirthdayWebsite);
+
+        introVideo.addEventListener("error", handleIntroMediaError);
+
+
+        const introSource = introVideo.querySelector("source");
+
+        if (introSource) {
+
+            introSource.addEventListener("error", handleIntroMediaError);
+
+        }
+
+
+        /* =====================================
+           3. SMOOTH DOWNWARD SCROLLING PARALLAX
+              (Foreground elements only;
+               backgrounds remain fixed)
+        ====================================== */
+
+        let parallaxInitialized = false;
+
+
+        function initSmoothParallax() {
+
+            if (parallaxInitialized) return;
+
+            parallaxInitialized = true;
+
+
+            const prefersReducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+            if (prefersReducedMotion) return;
+
+
+            const parallaxElements = Array.from(
+                document.querySelectorAll("[data-parallax]")
+            );
+
+
+            let targetScrollY = window.scrollY || window.pageYOffset;
+
+            let currentScrollY = targetScrollY;
+
+            let rafId = null;
+
+
+            function clamp(value, min, max) {
+
+                return Math.min(Math.max(value, min), max);
+
+            }
+
+
+            function updateParallaxFrame() {
+
+                currentScrollY += (targetScrollY - currentScrollY) * 0.1;
+
+                const scrollDelta = targetScrollY - currentScrollY;
+
+                const viewportHeight = window.innerHeight || 1;
+
+                const scrollAdjustment = currentScrollY - targetScrollY;
+
+
+                parallaxElements.forEach((element) => {
+
+                    const speed = Math.abs(
+                        parseFloat(element.dataset.parallax) || 0
+                    );
+
+                    const section =
+                        element.closest("section, footer") || element;
+
+                    const rect = section.getBoundingClientRect();
+
+                    if (
+                        rect.bottom < -300 ||
+                        rect.top > viewportHeight + 300
+                    ) {
+
+                        return;
+
+                    }
+
+                    let offset = 0;
+
+                    if (section.id === "home") {
+
+                        /* Hero foreground elements move smoothly downwards as you scroll down */
+                        offset = clamp(currentScrollY * speed, 0, 110);
+
+                    } else {
+
+                        /* Section elements move smoothly downwards as you scroll down through the section */
+                        const sectionCenter =
+                            rect.top - scrollAdjustment + rect.height * 0.5;
+
+                        const downwardScrollProgress =
+                            viewportHeight * 0.5 - sectionCenter;
+
+                        offset = clamp(
+                            downwardScrollProgress * speed,
+                            -42,
+                            42
+                        );
+
+                    }
+
+                    element.style.setProperty(
+                        "--parallax-y",
+                        `${offset.toFixed(2)}px`
+                    );
+
+                });
+
+
+                if (Math.abs(scrollDelta) > 0.08) {
+
+                    rafId = requestAnimationFrame(updateParallaxFrame);
+
+                } else {
+
+                    currentScrollY = targetScrollY;
+
+                    rafId = null;
+
+                }
+
+            }
+
+
+            function requestParallaxTick() {
+
+                targetScrollY = window.scrollY || window.pageYOffset;
+
+                if (!rafId) {
+
+                    rafId = requestAnimationFrame(updateParallaxFrame);
+
+                }
+
+            }
+
+
+            window.addEventListener("scroll", requestParallaxTick, {
+                passive: true
+            });
+
+            window.addEventListener("resize", requestParallaxTick, {
+                passive: true
+            });
+
+
+            requestParallaxTick();
+
+        }
+
+
+        /* =====================================
+           4. UPDATE BIRTHDAY INFORMATION
+        ====================================== */
+
+        document.getElementById("heroName").textContent =
+            BIRTHDAY_INFO.name;
+
+        document.getElementById("birthdayDateText").textContent =
+            BIRTHDAY_INFO.date;
+
+        document.getElementById("birthdayTimeText").textContent =
+            BIRTHDAY_INFO.time;
+
+        document.getElementById("birthdayVenueText").textContent =
+            BIRTHDAY_INFO.venue;
+
+
+        /* =====================================
+           5. COUNTDOWN TIMER
+        ====================================== */
+
+        let countdownInterval = null;
+
+
+        function startCountdown() {
+
+            if (countdownInterval) {
+
+                clearInterval(countdownInterval);
+
+            }
+
+
+            const targetDate = new Date(
+                BIRTHDAY_INFO.countdownDate
+            );
+
+
+            const countdownIds = [
+                "days",
+                "hours",
+                "minutes",
+                "seconds"
+            ];
+
+
+            if (
+                !BIRTHDAY_INFO.countdownDate ||
+                Number.isNaN(targetDate.getTime())
+            ) {
+
+                countdownIds.forEach((id) => {
+
+                    document.getElementById(id).textContent = "--";
+
+                });
+
+                console.warn(
+                    "Please set a valid countdownDate in BIRTHDAY_INFO."
+                );
+
+                return;
+
+            }
+
+
+            function updateCountdown() {
+
+                const now = new Date();
+
+                const difference =
+                    targetDate.getTime() - now.getTime();
+
+
+                if (difference <= 0) {
+
+                    countdownIds.forEach((id) => {
+
+                        document.getElementById(id).textContent = "00";
+
+                    });
+
+                    clearInterval(countdownInterval);
+
+                    return;
+
+                }
+
+
+                const days = Math.floor(
+                    difference / (1000 * 60 * 60 * 24)
+                );
+
+                const hours = Math.floor(
+                    (difference / (1000 * 60 * 60)) % 24
+                );
+
+                const minutes = Math.floor(
+                    (difference / (1000 * 60)) % 60
+                );
+
+                const seconds = Math.floor(
+                    (difference / 1000) % 60
+                );
+
+
+                document.getElementById("days").textContent =
+                    String(days).padStart(2, "0");
+
+                document.getElementById("hours").textContent =
+                    String(hours).padStart(2, "0");
+
+                document.getElementById("minutes").textContent =
+                    String(minutes).padStart(2, "0");
+
+                document.getElementById("seconds").textContent =
+                    String(seconds).padStart(2, "0");
+
+            }
+
+
+            updateCountdown();
+
+            countdownInterval = setInterval(
+                updateCountdown,
+                1000
+            );
+
+        }
+
+
+        /* =====================================
+           6. IMAGE CAROUSEL
+
+           Features:
+           - Smooth horizontal sliding
+           - Previous / next navigation
+           - Clickable pagination dots
+           - Mobile touch swipe
+           - Keyboard arrow navigation
+           - Automatic slideshow
+           - Pause / play controls
+        ====================================== */
+
+        const galleryTrack =
+            document.getElementById("galleryTrack");
+
+        const galleryViewport =
+            document.getElementById("galleryViewport");
+
+        const galleryCounter =
+            document.getElementById("galleryCounter");
+
+        const galleryDots =
+            document.getElementById("galleryDots");
+
+        const previousButton =
+            document.getElementById("previousImage");
+
+        const nextButton =
+            document.getElementById("nextImage");
+
+        const autoPlayButton =
+            document.getElementById("autoPlayButton");
+
+
+        const gallerySlides = Array.from(
+            galleryTrack.querySelectorAll(".carousel-slide")
+        );
+
+
+        const galleryImages = gallerySlides.map((slide) =>
+            slide.querySelector("img")
+        );
+
+
+        const totalGalleryImages = gallerySlides.length;
+
+
+        let currentImageIndex = 0;
+
+        let autoPlayEnabled = !window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        let autoPlayTimer = null;
+
+        let galleryIsVisible = false;
+
+        let touchStartX = 0;
+
+
+        /* Preload nearby images for smoother transitions. */
+
+        function preloadNearbyImages() {
+
+            [-1, 1].forEach((direction) => {
+
+                const index = (
+                    currentImageIndex +
+                    direction +
+                    totalGalleryImages
+                ) % totalGalleryImages;
+
+
+                const image = galleryImages[index];
+
+
+                if (image && image.loading === "lazy") {
+
+                    image.loading = "eager";
+
+                }
+
+            });
+
+        }
+
+
+        /* Create pagination dots automatically. */
+
+        function createGalleryDots() {
+
+            galleryDots.innerHTML = "";
+
+
+            gallerySlides.forEach((slide, index) => {
+
+                const dot = document.createElement("button");
+
+                dot.type = "button";
+
+                dot.className = "carousel-dot";
+
+
+                dot.setAttribute(
+                    "aria-label",
+                    `Show birthday photo ${index + 1}`
+                );
+
+
+                dot.setAttribute("aria-pressed", "false");
+
+
+                dot.addEventListener("click", () => {
+
+                    goToGalleryImage(index);
+
+                });
+
+
+                galleryDots.appendChild(dot);
+
+            });
+
+        }
+
+
+        function getGalleryDots() {
+
+            return Array.from(
+                galleryDots.querySelectorAll(".carousel-dot")
+            );
+
+        }
+
+
+        /* Update slide, counter, and active pagination dot. */
+
+        function updateGallery() {
+
+            galleryTrack.style.transform =
+                `translateX(-${currentImageIndex * 100}%)`;
+
+
+            galleryCounter.textContent =
+                `${String(currentImageIndex + 1).padStart(2, "0")} / ` +
+                `${String(totalGalleryImages).padStart(2, "0")}`;
+
+
+            getGalleryDots().forEach((dot, index) => {
+
+                const isActive = index === currentImageIndex;
+
+                dot.classList.toggle("active", isActive);
+
+                dot.setAttribute(
+                    "aria-pressed",
+                    String(isActive)
+                );
+
+            });
+
+
+            preloadNearbyImages();
+
+        }
+
+
+        /* Navigate to a particular image. */
+
+        function goToGalleryImage(index) {
+
+            currentImageIndex =
+                (index + totalGalleryImages) % totalGalleryImages;
+
+            updateGallery();
+
+        }
+
+
+        /* Move forward or backward. */
+
+        function showGalleryImage(direction) {
+
+            goToGalleryImage(
+                currentImageIndex + direction
+            );
+
+        }
+
+
+        /* Start automatic slideshow. */
+
+        function startAutoPlay() {
+
+            if (
+                !autoPlayEnabled ||
+                autoPlayTimer ||
+                !galleryIsVisible ||
+                document.hidden
+            ) {
+
+                return;
+
+            }
+
+
+            autoPlayTimer = window.setInterval(() => {
+
+                showGalleryImage(1);
+
+            }, 4500);
+
+        }
+
+
+        /* Stop automatic slideshow. */
+
+        function stopAutoPlay() {
+
+            if (autoPlayTimer) {
+
+                clearInterval(autoPlayTimer);
+
+                autoPlayTimer = null;
+
+            }
+
+        }
+
+
+        /* Update autoplay button text. */
+
+        function updateAutoPlayButton() {
+
+            autoPlayButton.textContent = autoPlayEnabled
+                ? "Pause Slideshow"
+                : "Play Slideshow";
+
+
+            autoPlayButton.setAttribute(
+                "aria-label",
+                autoPlayEnabled
+                    ? "Pause slideshow"
+                    : "Play slideshow"
+            );
+
+        }
+
+
+        /* Previous arrow. */
+
+        previousButton.addEventListener("click", () => {
+
+            showGalleryImage(-1);
+
+        });
+
+
+        /* Next arrow. */
+
+        nextButton.addEventListener("click", () => {
+
+            showGalleryImage(1);
+
+        });
+
+
+        /* Pause / play slideshow. */
+
+        autoPlayButton.addEventListener("click", () => {
+
+            autoPlayEnabled = !autoPlayEnabled;
+
+            updateAutoPlayButton();
+
+
+            if (autoPlayEnabled) {
+
+                startAutoPlay();
+
+            } else {
+
+                stopAutoPlay();
+
+            }
+
+        });
+
+
+        /* Keyboard navigation. */
+
+        galleryViewport.addEventListener("keydown", (event) => {
+
+            if (event.key === "ArrowLeft") {
+
+                event.preventDefault();
+
+                showGalleryImage(-1);
+
+            } else if (event.key === "ArrowRight") {
+
+                event.preventDefault();
+
+                showGalleryImage(1);
+
+            }
+
+        });
+
+
+        /* Mobile swipe navigation. */
+
+        galleryViewport.addEventListener("touchstart", (event) => {
+
+            touchStartX = event.changedTouches[0].screenX;
+
+        }, { passive: true });
+
+
+        galleryViewport.addEventListener("touchend", (event) => {
+
+            const touchEndX = event.changedTouches[0].screenX;
+
+            const swipeDistance = touchEndX - touchStartX;
+
+
+            if (Math.abs(swipeDistance) < 45) {
+
+                return;
+
+            }
+
+
+            showGalleryImage(
+                swipeDistance < 0 ? 1 : -1
+            );
+
+        }, { passive: true });
+
+
+        /* Pause slideshow when gallery is outside the viewport. */
+
+        if ("IntersectionObserver" in window) {
+
+            const galleryObserver = new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach((entry) => {
+
+                        galleryIsVisible = entry.isIntersecting;
+
+
+                        if (galleryIsVisible) {
+
+                            startAutoPlay();
+
+                        } else {
+
+                            stopAutoPlay();
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.3
+                }
+            );
+
+
+            galleryObserver.observe(
+                document.getElementById("gallery")
+            );
+
+        } else {
+
+            galleryIsVisible = true;
+
+        }
+
+
+        /* Pause slideshow when visitor changes browser tabs. */
+
+        document.addEventListener("visibilitychange", () => {
+
+            if (document.hidden) {
+
+                stopAutoPlay();
+
+            } else {
+
+                startAutoPlay();
+
+            }
+
+        });
+
+
+        /* Initialize carousel. */
+
+        createGalleryDots();
+
+        updateGallery();
+
+        updateAutoPlayButton();
+
+
+        /* =====================================
+           7. RSVP FORM
+        ====================================== */
+
+        const rsvpForm =
+            document.getElementById("rsvpForm");
+
+        const rsvpStatus =
+            document.getElementById("rsvpStatus");
+
+        const rsvpSubmit =
+            document.getElementById("rsvpSubmit");
+
+
+        rsvpForm.addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+
+
+            const formData = new FormData(rsvpForm);
+
+            const guestName = formData.get("name");
+
+
+            if (!RSVP_ENDPOINT) {
+
+                rsvpStatus.textContent =
+                    `Thank you, ${guestName}! The RSVP form is ready, ` +
+                    "but a submission URL has not been connected yet.";
+
+                return;
+
+            }
+
+
+            rsvpSubmit.disabled = true;
+
+            rsvpSubmit.textContent = "SENDING...";
+
+            rsvpStatus.textContent = "";
+
+
+            try {
+
+                const response = await fetch(RSVP_ENDPOINT, {
+
+                    method: "POST",
+
+                    body: new URLSearchParams(formData)
+
+                });
+
+
+                if (!response.ok) {
+
+                    throw new Error("RSVP submission failed.");
+
+                }
+
+
+                rsvpStatus.textContent =
+                    "Thank you! Your RSVP has been submitted successfully.";
+
+                rsvpForm.reset();
+
+
+            } catch (error) {
+
+                console.error("RSVP error:", error);
+
+                rsvpStatus.textContent =
+                    "Something went wrong. Please try again.";
+
+            } finally {
+
+                rsvpSubmit.disabled = false;
+
+                rsvpSubmit.textContent = "SUBMIT RSVP";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
